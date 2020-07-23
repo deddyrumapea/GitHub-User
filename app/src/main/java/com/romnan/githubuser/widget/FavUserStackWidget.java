@@ -19,7 +19,7 @@ public class FavUserStackWidget extends AppWidgetProvider {
     static void updateAppWidget(Context context, AppWidgetManager appWidgetManager,
                                 int appWidgetId) {
 
-        Intent intent = new Intent(context, FavUserStackWidget.class);
+        Intent intent = new Intent(context, StackWidgetService.class);
         intent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, appWidgetId);
         intent.setData(Uri.parse(intent.toUri(Intent.URI_INTENT_SCHEME)));
 
