@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="@dimen/margin_16dp"
+        android:text="@string/label_about_me"
+        android:textStyle="bold" />
+
+    <ImageView
+        android:id="@+id/about_profile_image"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="@dimen/margin_16dp"
+        android:contentDescription="@string/content_desc_developer_profile_picture"
+        tools:src="@drawable/img_profile" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginHorizontal="@dimen/margin_32dp"
+        android:layout_marginTop="@dimen/margin_16dp"
+        android:lineSpacingExtra="5dp"
+        android:text="@string/label_about_description"
+        android:textColor="@color/greyDark"
+        android:textSize="15sp" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="@dimen/margin_8dp"
+        android:drawableStart="@drawable/ic_location_grey"
+        android:drawablePadding="@dimen/padding_8dp"
+        android:text="@string/label_jambi_indonesia" />
+
+    <Button
+        android:id="@+id/close_btn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/margin_16dp"
+        android:background="@android:color/white"
+        android:foreground="?android:selectableItemBackground"
+        android:text="@string/label_close"
+        android:textColor="@color/pomegranate"
+        android:textStyle="bold" />
+</LinearLayout>

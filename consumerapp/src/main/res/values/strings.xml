@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name" translatable="false">Consumer App</string>
+    <string name="label_repositories">Repositories</string>
+    <string name="label_followers">Followers</string>
+    <string name="label_following">Following</string>
+    <string name="content_desc_user_profile_picture">user profile picture</string>
+    <string name="favorite_users">Favorite users</string>
+    <string name="not_found">Not found</string>
+    <string name="removed_favorite">Removed from favorite users</string>
+    <string name="added_favorite">Added to favorite users</string>
+</resources>

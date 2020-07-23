@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">GitHub User</string>
+    <string name="label_repositories">Repositori</string>
+    <string name="label_followers">Pengikut</string>
+    <string name="label_following">Mengikuti</string>
+    <string name="content_desc_user_profile_picture">gambar profil pengguna</string>
+    <string name="favorite_users">Pengguna favorit</string>
+    <string name="not_found">Tidak ditemukan</string>
+    <string name="removed_favorite">Dihapus dari favorit</string>
+    <string name="added_favorite">Ditambahkan ke favorit</string>
+</resources>

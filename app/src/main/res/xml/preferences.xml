@@ -1,0 +1,17 @@
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <SwitchPreference
+        android:defaultValue="false"
+        android:icon="@drawable/ic_bell"
+        android:key="@string/key_reminder"
+        android:title="@string/reminder_preference_title" />
+
+    <ListPreference
+        android:defaultValue="@string/auto"
+        android:entries="@array/languages"
+        android:entryValues="@array/languages"
+        android:icon="@drawable/ic_language"
+        android:key="@string/key_language"
+        android:title="@string/language" />
+
+</PreferenceScreen>

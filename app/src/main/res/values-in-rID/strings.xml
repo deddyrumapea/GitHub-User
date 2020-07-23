@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">GitHub User</string>
+    <string name="label_repositories">Repositori</string>
+    <string name="label_followers">Pengikut</string>
+    <string name="label_following">Mengikuti</string>
+    <string name="dialog_title_about">Tentang</string>
+    <string name="content_desc_user_profile_picture">gambar profil pengguna</string>
+    <string name="hint_search_user">Cari pengguna</string>
+    <string name="content_desc_developer_profile_picture">Gambar profil pengembang</string>
+    <string name="label_close">Tutup</string>
+    <string name="label_about_me">Tentang Saya</string>
+    <string name="favorite_users">Pengguna favorit</string>
+    <string name="not_found">Tidak ditemukan</string>
+    <string name="label_search_instruction">Gunakan bar pencarian di atas untuk mencari pengguna</string>
+    <string name="removed_favorite">Dihapus dari favorit</string>
+    <string name="added_favorite">Ditambahkan ke favorit</string>
+    <string name="settings">Pengaturan</string>
+    <string name="reminder_preference_title">Pengingat setiap pukul 09.00</string>
+    <string name="language">Bahasa</string>
+    <string name="alarm_message">Temukan pengguna populer di GitHub!</string>
+    <string name="reminder_set_up">Notifikasi pengingat telah diatur</string>
+    <string name="reminder_cancelled">Notifikasi pengingat dibatalkan</string>
+</resources>
