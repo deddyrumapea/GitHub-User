@@ -33,6 +33,8 @@ interface LoadFavUsersCallback {
     void postExecute(ArrayList<User> users);
 }
 
+// TODO : update all the shit here
+
 public class MainActivity extends AppCompatActivity implements LoadFavUsersCallback {
     private static final String EXTRA_STATE = "extra_state";
     private UserRecyclerViewAdapter userRecyclerViewAdapter;
