@@ -2,6 +2,9 @@ package com.romnan.githubuser.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -28,7 +31,6 @@ public class FavUserActivity extends AppCompatActivity {
     private ProgressBar progressBar;
     private TextView tvNotFound;
     private FavUserViewModel favUserViewModel;
-    private FavUserHelper favUserHelper;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,18 +43,14 @@ public class FavUserActivity extends AppCompatActivity {
 
         progressBar = findViewById(R.id.loadingBar);
         tvNotFound = findViewById(R.id.tv_not_found);
+
         RecyclerView rvFavUsers = findViewById(R.id.rv_users);
         rvFavUsers.setLayoutManager(new LinearLayoutManager(this));
         rvFavUsers.setHasFixedSize(true);
         userRecyclerViewAdapter = new UserRecyclerViewAdapter();
         rvFavUsers.setAdapter(userRecyclerViewAdapter);
-        progressBar.setVisibility(View.VISIBLE);
 
-        favUserHelper = FavUserHelper.getInstance(getApplicationContext());
-        favUserHelper.open();
-        favUserViewModel = new ViewModelProvider
-                (this, new ViewModelProvider.NewInstanceFactory()).get(FavUserViewModel.class);
-        favUserViewModel.loadFavUser(favUserHelper);
+        loadFavUser();
         favUserViewModel.getFavUsers().observe(this, new Observer<ArrayList<User>>() {
             @Override
             public void onChanged(ArrayList<User> users) {
@@ -78,6 +76,35 @@ public class FavUserActivity extends AppCompatActivity {
                 }
             }
         });
+    }
+
+    private void loadFavUser() {
+        progressBar.setVisibility(View.VISIBLE);
+        FavUserHelper favUserHelper = FavUserHelper.getInstance(getApplicationContext());
+        favUserHelper.open();
+        favUserViewModel = new ViewModelProvider
+                (this, new ViewModelProvider.NewInstanceFactory()).get(FavUserViewModel.class);
+        favUserViewModel.loadFavUser(favUserHelper);
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater menuInflater = getMenuInflater();
+        menuInflater.inflate(R.menu.menu_fav_user_activity, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.refresh:
+                loadFavUser();
+                break;
+            case android.R.id.home:
+                finish();
+                break;
+        }
+        return true;
     }
 
     @Override

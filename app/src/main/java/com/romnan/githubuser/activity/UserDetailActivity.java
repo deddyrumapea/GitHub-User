@@ -6,10 +6,12 @@ import android.content.ContentValues;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 import androidx.viewpager.widget.ViewPager;
@@ -150,7 +152,7 @@ public class UserDetailActivity extends AppCompatActivity {
             Snackbar.make(findViewById(R.id.user_detail_layout), R.string.added_favorite,
                     Snackbar.LENGTH_SHORT).show();
         }
-        updateFavStackWidget();
+//        updateFavStackWidget();
     }
 
     boolean isFavoriteUser(int id) {
@@ -172,5 +174,13 @@ public class UserDetailActivity extends AppCompatActivity {
         int[] appWidgetIds = appWidgetManager.getAppWidgetIds(thisWidget);
         //TODO : there is an error here
         appWidgetManager.notifyAppWidgetViewDataChanged(appWidgetIds, R.id.stack_view);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        if (item.getItemId() == android.R.id.home) {
+            finish();
+        }
+        return true;
     }
 }
