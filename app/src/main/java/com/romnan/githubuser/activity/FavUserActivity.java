@@ -43,14 +43,9 @@ public class FavUserActivity extends AppCompatActivity {
 
         progressBar = findViewById(R.id.loadingBar);
         tvNotFound = findViewById(R.id.tv_not_found);
-
-        RecyclerView rvFavUsers = findViewById(R.id.rv_users);
-        rvFavUsers.setLayoutManager(new LinearLayoutManager(this));
-        rvFavUsers.setHasFixedSize(true);
-        userRecyclerViewAdapter = new UserRecyclerViewAdapter();
-        rvFavUsers.setAdapter(userRecyclerViewAdapter);
-
         loadFavUser();
+        setRecyclerView();
+
         favUserViewModel.getFavUsers().observe(this, new Observer<ArrayList<User>>() {
             @Override
             public void onChanged(ArrayList<User> users) {
@@ -66,6 +61,24 @@ public class FavUserActivity extends AppCompatActivity {
             }
         });
 
+    }
+
+    private void loadFavUser() {
+        progressBar.setVisibility(View.VISIBLE);
+        FavUserHelper favUserHelper = FavUserHelper.getInstance(getApplicationContext());
+        favUserHelper.open();
+        favUserViewModel = new ViewModelProvider
+                (this, new ViewModelProvider.NewInstanceFactory()).get(FavUserViewModel.class);
+        favUserViewModel.loadFavUser(favUserHelper);
+    }
+
+    private void setRecyclerView() {
+        RecyclerView rvFavUsers = findViewById(R.id.rv_users);
+        rvFavUsers.setLayoutManager(new LinearLayoutManager(this));
+        rvFavUsers.setHasFixedSize(true);
+        userRecyclerViewAdapter = new UserRecyclerViewAdapter();
+        rvFavUsers.setAdapter(userRecyclerViewAdapter);
+
         //recyclerView item click callback method, open UserDetailActivity for specific user clicked
         userRecyclerViewAdapter.setOnItemClickCallback(new UserRecyclerViewAdapter.OnItemClickCallback() {
             @Override
@@ -78,15 +91,6 @@ public class FavUserActivity extends AppCompatActivity {
                 }
             }
         });
-    }
-
-    private void loadFavUser() {
-        progressBar.setVisibility(View.VISIBLE);
-        FavUserHelper favUserHelper = FavUserHelper.getInstance(getApplicationContext());
-        favUserHelper.open();
-        favUserViewModel = new ViewModelProvider
-                (this, new ViewModelProvider.NewInstanceFactory()).get(FavUserViewModel.class);
-        favUserViewModel.loadFavUser(favUserHelper);
     }
 
     @Override

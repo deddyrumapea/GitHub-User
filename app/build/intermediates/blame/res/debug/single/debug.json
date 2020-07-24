@@ -24,6 +24,10 @@
         "source": "C:\\Users\\romnan\\AndroidStudioProjects\\GitHubUser\\app\\src\\main\\res\\mipmap-anydpi-v26\\ic_launcher.xml"
     },
     {
+        "merged": "C:\\Users\\romnan\\AndroidStudioProjects\\GitHubUser\\app\\build\\intermediates\\res\\merged\\debug\\menu_menu_main_activity.xml.flat",
+        "source": "C:\\Users\\romnan\\AndroidStudioProjects\\GitHubUser\\app\\src\\main\\res\\menu\\menu_main_activity.xml"
+    },
+    {
         "merged": "C:\\Users\\romnan\\AndroidStudioProjects\\GitHubUser\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-hdpi_ic_launcher_round.png.flat",
         "source": "C:\\Users\\romnan\\AndroidStudioProjects\\GitHubUser\\app\\src\\main\\res\\mipmap-hdpi\\ic_launcher_round.png"
     },
@@ -112,8 +116,8 @@
         "source": "C:\\Users\\romnan\\AndroidStudioProjects\\GitHubUser\\app\\src\\main\\res\\drawable\\ic_baseline_favorite_border.xml"
     },
     {
-        "merged": "C:\\Users\\romnan\\AndroidStudioProjects\\GitHubUser\\app\\build\\intermediates\\res\\merged\\debug\\menu_menu.xml.flat",
-        "source": "C:\\Users\\romnan\\AndroidStudioProjects\\GitHubUser\\app\\src\\main\\res\\menu\\menu.xml"
+        "merged": "C:\\Users\\romnan\\AndroidStudioProjects\\GitHubUser\\app\\build\\intermediates\\res\\merged\\debug\\menu_menu_fav_user_activity.xml.flat",
+        "source": "C:\\Users\\romnan\\AndroidStudioProjects\\GitHubUser\\app\\src\\main\\res\\menu\\menu_fav_user_activity.xml"
     },
     {
         "merged": "C:\\Users\\romnan\\AndroidStudioProjects\\GitHubUser\\app\\build\\intermediates\\res\\merged\\debug\\drawable_ic_location_grey.xml.flat",
@@ -130,6 +134,10 @@
     {
         "merged": "C:\\Users\\romnan\\AndroidStudioProjects\\GitHubUser\\app\\build\\intermediates\\res\\merged\\debug\\layout_activity_main.xml.flat",
         "source": "C:\\Users\\romnan\\AndroidStudioProjects\\GitHubUser\\app\\src\\main\\res\\layout\\activity_main.xml"
+    },
+    {
+        "merged": "C:\\Users\\romnan\\AndroidStudioProjects\\GitHubUser\\app\\build\\intermediates\\res\\merged\\debug\\drawable_ic_refresh.xml.flat",
+        "source": "C:\\Users\\romnan\\AndroidStudioProjects\\GitHubUser\\app\\src\\main\\res\\drawable\\ic_refresh.xml"
     },
     {
         "merged": "C:\\Users\\romnan\\AndroidStudioProjects\\GitHubUser\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-xxhdpi_ic_launcher_round.png.flat",

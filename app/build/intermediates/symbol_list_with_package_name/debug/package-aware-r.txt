@@ -1455,6 +1455,7 @@ drawable ic_mtrl_checked_circle
 drawable ic_mtrl_chip_checked_black
 drawable ic_mtrl_chip_checked_circle
 drawable ic_mtrl_chip_close_circle
+drawable ic_refresh
 drawable img_profile
 drawable mtrl_dialog_background
 drawable mtrl_dropdown_arrow
@@ -1703,6 +1704,7 @@ id progress_circular
 id progress_horizontal
 id radio
 id recycler_view
+id refresh
 id right
 id right_icon
 id right_side
@@ -1979,7 +1981,8 @@ layout text_view_with_theme_line_height
 layout text_view_without_line_height
 layout users_list
 layout widget_item
-menu menu
+menu menu_fav_user_activity
+menu menu_main_activity
 mipmap ic_launcher
 mipmap ic_launcher_round
 plurals mtrl_badge_content_description
