@@ -1,5 +1,7 @@
 package com.romnan.githubuser.activity;
 
+import android.appwidget.AppWidgetManager;
+import android.content.ComponentName;
 import android.content.ContentValues;
 import android.database.Cursor;
 import android.net.Uri;
@@ -21,6 +23,7 @@ import com.romnan.githubuser.R;
 import com.romnan.githubuser.adapter.TabPagerAdapter;
 import com.romnan.githubuser.fragment.FollowTabFragment;
 import com.romnan.githubuser.model.User;
+import com.romnan.githubuser.widget.FavUserStackWidget;
 
 import static android.provider.BaseColumns._ID;
 import static com.romnan.githubuser.database.DatabaseContract.FavUserColumns.AVATAR;
@@ -147,6 +150,7 @@ public class UserDetailActivity extends AppCompatActivity {
             Snackbar.make(findViewById(R.id.user_detail_layout), R.string.added_favorite,
                     Snackbar.LENGTH_SHORT).show();
         }
+        updateFavStackWidget();
     }
 
     boolean isFavoriteUser(int id) {
@@ -160,5 +164,12 @@ public class UserDetailActivity extends AppCompatActivity {
             }
         }
         return false;
+    }
+
+    private void updateFavStackWidget() {
+        AppWidgetManager appWidgetManager = AppWidgetManager.getInstance(getApplicationContext());
+        ComponentName thisWidget = new ComponentName(getApplicationContext(), FavUserStackWidget.class);
+        int[] appWidgetIds = appWidgetManager.getAppWidgetIds(thisWidget);
+        appWidgetManager.notifyAppWidgetViewDataChanged(appWidgetIds, R.id.stack_view);
     }
 }

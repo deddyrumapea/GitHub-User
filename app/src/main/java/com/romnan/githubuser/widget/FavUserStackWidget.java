@@ -19,7 +19,7 @@ public class FavUserStackWidget extends AppWidgetProvider {
     static void updateAppWidget(Context context, AppWidgetManager appWidgetManager,
                                 int appWidgetId) {
 
-        Intent intent = new Intent(context, FavUserStackWidget.class);
+        Intent intent = new Intent(context, StackWidgetService.class);
         intent.putExtra(AppWidgetManager.EXTRA_APPWIDGET_ID, appWidgetId);
         intent.setData(Uri.parse(intent.toUri(Intent.URI_INTENT_SCHEME)));
 
@@ -40,7 +40,6 @@ public class FavUserStackWidget extends AppWidgetProvider {
 
     @Override
     public void onUpdate(Context context, AppWidgetManager appWidgetManager, int[] appWidgetIds) {
-        // There may be multiple widgets active, so update all of them
         for (int appWidgetId : appWidgetIds) {
             updateAppWidget(context, appWidgetManager, appWidgetId);
         }
@@ -51,8 +50,8 @@ public class FavUserStackWidget extends AppWidgetProvider {
         super.onReceive(context, intent);
         if (intent.getAction() != null) {
             if (intent.getAction().equals(TOAST_ACTION)) {
-                int viewIndex = intent.getIntExtra(EXTRA_ITEM, 0);
-                Toast.makeText(context, "Touched view " + viewIndex, Toast.LENGTH_SHORT).show();
+                String name = intent.getStringExtra(EXTRA_ITEM);
+                Toast.makeText(context, name, Toast.LENGTH_SHORT).show();
             }
         }
     }
