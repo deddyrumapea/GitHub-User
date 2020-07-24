@@ -26,6 +26,7 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.romnan.githubuser.R;
 import com.romnan.githubuser.adapter.UserRecyclerViewAdapter;
+import com.romnan.githubuser.helper.ErrorMessageResolver;
 import com.romnan.githubuser.model.User;
 import com.romnan.githubuser.viewmodel.MainViewModel;
 
@@ -34,9 +35,11 @@ import java.util.Objects;
 
 public class MainActivity extends AppCompatActivity {
     private static final String STATE_SEARCHED = "state_searched";
-    MainViewModel mainViewModel;
+    private MainViewModel mainViewModel;
+    private UserRecyclerViewAdapter userRecyclerViewAdapter;
     private ProgressBar progressBar;
     private TextView tvNotFound;
+    private String searchQuery;
     private boolean searched = false;
 
     @Override
@@ -51,39 +54,9 @@ public class MainActivity extends AppCompatActivity {
         //display instruction screen
         displayInstruction(savedInstanceState);
 
-        //Set up recyclerView
-        RecyclerView rvUsers = findViewById(R.id.rv_users);
-        rvUsers.setLayoutManager(new LinearLayoutManager(this));
-        final UserRecyclerViewAdapter userRecyclerViewAdapter = new UserRecyclerViewAdapter();
-        userRecyclerViewAdapter.notifyDataSetChanged();
-        rvUsers.setAdapter(userRecyclerViewAdapter);
+        setRecyclerView();
+        setSearchView();
 
-        // Seach bar
-        SearchManager searchManager = (SearchManager) getSystemService(Context.SEARCH_SERVICE);
-
-        //Create searchView
-        if (searchManager != null) {
-            final SearchView searchView = findViewById(R.id.search_bar);
-            searchView.setSearchableInfo(searchManager.getSearchableInfo(getComponentName()));
-            searchView.setQueryHint(getResources().getString(R.string.hint_search_user));
-            searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-                @Override
-                public boolean onQueryTextSubmit(String query) {
-                    mainViewModel.clearData(); //clear search result on the screen
-                    tvNotFound.setVisibility(View.GONE);
-                    progressBar.setVisibility(View.VISIBLE);
-                    mainViewModel.searchUser(query);
-                    searchView.clearFocus(); // hide keyboard
-                    searched = true;
-                    return true;
-                }
-
-                @Override
-                public boolean onQueryTextChange(String newText) {
-                    return false;
-                }
-            });
-        }
 
         //Set up mainViewModel
         mainViewModel = new ViewModelProvider
@@ -103,6 +76,34 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        //set error loading data from client listener
+        mainViewModel.setOnErrorReceivingDataListener(new MainViewModel.OnErrorReceivingDataListener() {
+            @Override
+            public void onErrorReceivingData(int errorCode) {
+                //display error message when there is an error
+                progressBar.setVisibility(View.GONE);
+                tvNotFound.setVisibility(View.VISIBLE);
+                String errorMessage;
+                if (errorCode == 69) {
+                    errorMessage = String.format(getString(R.string.error_69), searchQuery);
+                } else {
+                    errorMessage = ErrorMessageResolver.getErrorMessageString
+                            (MainActivity.this, errorCode);
+                }
+                tvNotFound.setText(errorMessage);
+                searched = false; //display instruction screen again if the state changed
+            }
+        });
+    }
+
+    private void setRecyclerView() {
+        //Set up recyclerView
+        RecyclerView rvUsers = findViewById(R.id.rv_users);
+        rvUsers.setLayoutManager(new LinearLayoutManager(this));
+        userRecyclerViewAdapter = new UserRecyclerViewAdapter();
+        userRecyclerViewAdapter.notifyDataSetChanged();
+        rvUsers.setAdapter(userRecyclerViewAdapter);
+
         //recyclerView item click callback method, open UserDetailActivity for specific user clicked
         userRecyclerViewAdapter.setOnItemClickCallback(new UserRecyclerViewAdapter.OnItemClickCallback() {
             @Override
@@ -115,18 +116,36 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         });
+    }
 
-        //set error loading data from client listener
-        mainViewModel.setOnErrorReceivingDataListener(new MainViewModel.OnErrorReceivingDataListener() {
-            @Override
-            public void onErrorReceivingData(String errorMessage) {
-                //display error message when there is an error
-                progressBar.setVisibility(View.GONE);
-                tvNotFound.setVisibility(View.VISIBLE);
-                tvNotFound.setText(errorMessage);
-                searched = false; //display instruction screen again if the state changed
-            }
-        });
+    private void setSearchView() {
+        // Seach bar
+        SearchManager searchManager = (SearchManager) getSystemService(Context.SEARCH_SERVICE);
+
+        //Create searchView
+        if (searchManager != null) {
+            final SearchView searchView = findViewById(R.id.search_bar);
+            searchView.setSearchableInfo(searchManager.getSearchableInfo(getComponentName()));
+            searchView.setQueryHint(getResources().getString(R.string.hint_search_user));
+            searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+                @Override
+                public boolean onQueryTextSubmit(String query) {
+                    mainViewModel.clearData(); //clear search result on the screen
+                    tvNotFound.setVisibility(View.GONE);
+                    progressBar.setVisibility(View.VISIBLE);
+                    mainViewModel.searchUser(query);
+                    searchView.clearFocus(); // hide keyboard
+                    searched = true;
+                    searchQuery = query;
+                    return true;
+                }
+
+                @Override
+                public boolean onQueryTextChange(String newText) {
+                    return false;
+                }
+            });
+        }
     }
 
     @Override

@@ -24,6 +24,10 @@ public class MainViewModel extends ViewModel {
     private MutableLiveData<ArrayList<User>> usersList = new MutableLiveData<>();
     private AsyncHttpClient client = new AsyncHttpClient();
 
+    private static final int ERROR_NO_MATCH = 69;
+    private static final int ERROR_UNKNOWN_EXCEPTION = 70;
+    private static final int ERROR_NO_DATA = 71;
+
     public void searchUser(final String query) {
         final ArrayList<User> listItems = new ArrayList<>();
 
@@ -42,8 +46,7 @@ public class MainViewModel extends ViewModel {
                     String response = new String(responseBody);
                     JSONObject responseObject = new JSONObject(response);
                     if (responseObject.getInt("total_count") == 0) {
-                        onErrorReceivingDataListener.onErrorReceivingData
-                                (String.format("We couldn’t find any users matching\n'%s'", query));
+                        onErrorReceivingDataListener.onErrorReceivingData(ERROR_NO_MATCH);
                     }
                     JSONArray items = responseObject.getJSONArray("items");
 
@@ -60,31 +63,14 @@ public class MainViewModel extends ViewModel {
                 } catch (JSONException e) {
                     e.printStackTrace();
                     Log.e(TAG, "exception " + e.getMessage());
-                    onErrorReceivingDataListener.onErrorReceivingData(e.getLocalizedMessage());
+                    onErrorReceivingDataListener.onErrorReceivingData(ERROR_UNKNOWN_EXCEPTION);
                 }
             }
 
             @Override
             public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
                 Log.d(TAG, "onFailure: " + error.getMessage());
-                String errorMessage;
-                switch (statusCode) {
-                    case 0:
-                        errorMessage = "Unable to connect";
-                        break;
-                    case 401:
-                        errorMessage = statusCode + " : Bad request";
-                        break;
-                    case 403:
-                        errorMessage = statusCode + " : Forbidden";
-                        break;
-                    case 404:
-                        errorMessage = statusCode + " : Not found";
-                        break;
-                    default:
-                        errorMessage = statusCode + error.getMessage();
-                }
-                onErrorReceivingDataListener.onErrorReceivingData(errorMessage);
+                onErrorReceivingDataListener.onErrorReceivingData(statusCode);
             }
         });
     }
@@ -107,7 +93,7 @@ public class MainViewModel extends ViewModel {
                     String response = new String(responseBody);
                     JSONArray responseArray = new JSONArray(response);
                     if (responseArray.length() == 0) {
-                        onErrorReceivingDataListener.onErrorReceivingData("Not found");
+                        onErrorReceivingDataListener.onErrorReceivingData(ERROR_NO_DATA);
                     }
 
                     for (int i = 0; i < responseArray.length(); i++) {
@@ -122,7 +108,7 @@ public class MainViewModel extends ViewModel {
                     }
                 } catch (JSONException e) {
                     e.printStackTrace();
-                    onErrorReceivingDataListener.onErrorReceivingData(e.getMessage());
+                    onErrorReceivingDataListener.onErrorReceivingData(ERROR_UNKNOWN_EXCEPTION);
                     Log.e(TAG, "exception " + e.getMessage());
                 }
             }
@@ -130,7 +116,7 @@ public class MainViewModel extends ViewModel {
             @Override
             public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
                 Log.d(TAG, "onFailure: " + error.getMessage());
-                onErrorReceivingDataListener.onErrorReceivingData(error.getMessage());
+                onErrorReceivingDataListener.onErrorReceivingData(statusCode);
             }
         });
     }
@@ -192,6 +178,6 @@ public class MainViewModel extends ViewModel {
     }
 
     public interface OnErrorReceivingDataListener {
-        void onErrorReceivingData(String errorMessage);
+        void onErrorReceivingData(int errorCode);
     }
 }

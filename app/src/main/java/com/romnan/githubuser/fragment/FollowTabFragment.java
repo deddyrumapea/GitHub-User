@@ -20,6 +20,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.romnan.githubuser.R;
 import com.romnan.githubuser.activity.UserDetailActivity;
 import com.romnan.githubuser.adapter.UserRecyclerViewAdapter;
+import com.romnan.githubuser.helper.ErrorMessageResolver;
 import com.romnan.githubuser.model.User;
 import com.romnan.githubuser.viewmodel.MainViewModel;
 
@@ -113,10 +114,10 @@ public class FollowTabFragment extends Fragment {
 
         mainViewModel.setOnErrorReceivingDataListener(new MainViewModel.OnErrorReceivingDataListener() {
             @Override
-            public void onErrorReceivingData(String errorMessage) {
+            public void onErrorReceivingData(int errorCode) {
                 loadingBar.setVisibility(View.GONE);
                 notFound.setVisibility(View.VISIBLE);
-                notFound.setText(errorMessage);
+                notFound.setText(ErrorMessageResolver.getErrorMessageString(getContext(), errorCode));
             }
         });
     }

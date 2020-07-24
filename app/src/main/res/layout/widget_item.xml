@@ -13,7 +13,7 @@
         android:layout_width="wrap_content"
         android:layout_height="40dp"
         android:layout_gravity="center_horizontal"
-        android:contentDescription="@string/user_profile_image"
+        android:contentDescription="@string/content_desc_user_profile_picture"
         android:src="@drawable/ic_github" />
 
     <TextView

@@ -32,5 +32,12 @@
     <string name="reminder_cancelled">Reminder notification is cancelled</string>
     <string name="appwidget_text" translatable="false">Fav Users</string>
     <string name="empty_text">No data</string>
-    <string name="user_profile_image">user profile image</string>
+    <string name="error_0">Unable to connect</string>
+    <string name="error_69">We couldn\'t find any users matching \'%s\'</string>
+    <string name="error_70">Error parsing data</string>
+    <string name="error_71">No data</string>
+    <string name="error_401" translatable="false">401 : Bad request</string>
+    <string name="error_403" translatable="false">403 : Forbidden</string>
+    <string name="error_404" translatable="false">404 : Not found</string>
+    <string name="error_default" translatable="false">Unknown error occurred : \n%d</string>
 </resources>
