@@ -1,0 +1,147 @@
+1<?xml version="1.0" encoding="utf-8"?>
+2<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+3    package="com.romnan.githubuser"
+4    android:versionCode="1"
+5    android:versionName="1.0" >
+6
+7    <uses-sdk
+8        android:minSdkVersion="23"
+8-->C:\Users\romnan\AndroidStudioProjects\GitHubUser\app\src\main\AndroidManifest.xml
+9        android:targetSdkVersion="29" />
+9-->C:\Users\romnan\AndroidStudioProjects\GitHubUser\app\src\main\AndroidManifest.xml
+10
+11    <uses-permission android:name="android.permission.INTERNET" />
+11-->C:\Users\romnan\AndroidStudioProjects\GitHubUser\app\src\main\AndroidManifest.xml:5:5-67
+11-->C:\Users\romnan\AndroidStudioProjects\GitHubUser\app\src\main\AndroidManifest.xml:5:22-64
+12
+13    <permission
+13-->C:\Users\romnan\AndroidStudioProjects\GitHubUser\app\src\main\AndroidManifest.xml:7:5-9:44
+14        android:name="com.romnan.githubuser.READ_DATABASE"
+14-->C:\Users\romnan\AndroidStudioProjects\GitHubUser\app\src\main\AndroidManifest.xml:8:9-59
+15        android:protectionLevel="normal" />
+15-->C:\Users\romnan\AndroidStudioProjects\GitHubUser\app\src\main\AndroidManifest.xml:9:9-41
+16    <permission
+16-->C:\Users\romnan\AndroidStudioProjects\GitHubUser\app\src\main\AndroidManifest.xml:10:5-12:44
+17        android:name="com.romnan.githubuser.WRITE_DATABASE"
+17-->C:\Users\romnan\AndroidStudioProjects\GitHubUser\app\src\main\AndroidManifest.xml:11:9-60
+18        android:protectionLevel="normal" />
+18-->C:\Users\romnan\AndroidStudioProjects\GitHubUser\app\src\main\AndroidManifest.xml:12:9-41
+19
+20    <application
+20-->C:\Users\romnan\AndroidStudioProjects\GitHubUser\app\src\main\AndroidManifest.xml:14:5-72:19
+21        android:allowBackup="true"
+21-->C:\Users\romnan\AndroidStudioProjects\GitHubUser\app\src\main\AndroidManifest.xml:15:9-35
+22        android:appComponentFactory="androidx.core.app.CoreComponentFactory"
+22-->[androidx.core:core:1.1.0] C:\Users\romnan\.gradle\caches\transforms-2\files-2.1\76f2b6439d16df60df3177021482ee5a\core-1.1.0\AndroidManifest.xml:24:18-86
+23        android:debuggable="true"
+24        android:extractNativeLibs="false"
+25        android:fullBackupContent="true"
+25-->C:\Users\romnan\AndroidStudioProjects\GitHubUser\app\src\main\AndroidManifest.xml:16:9-41
+26        android:icon="@mipmap/ic_launcher"
+26-->C:\Users\romnan\AndroidStudioProjects\GitHubUser\app\src\main\AndroidManifest.xml:17:9-43
+27        android:label="@string/app_name"
+27-->C:\Users\romnan\AndroidStudioProjects\GitHubUser\app\src\main\AndroidManifest.xml:18:9-41
+28        android:roundIcon="@mipmap/ic_launcher_round"
+28-->C:\Users\romnan\AndroidStudioProjects\GitHubUser\app\src\main\AndroidManifest.xml:19:9-54
+29        android:supportsRtl="true"
+29-->C:\Users\romnan\AndroidStudioProjects\GitHubUser\app\src\main\AndroidManifest.xml:20:9-35
+30        android:testOnly="true"
+31        android:theme="@style/AppTheme"
+31-->C:\Users\romnan\AndroidStudioProjects\GitHubUser\app\src\main\AndroidManifest.xml:21:9-40
+32        android:usesCleartextTraffic="true" >
+32-->C:\Users\romnan\AndroidStudioProjects\GitHubUser\app\src\main\AndroidManifest.xml:22:9-44
+33        <receiver android:name="com.romnan.githubuser.widget.FavUserStackWidget" >
+33-->C:\Users\romnan\AndroidStudioProjects\GitHubUser\app\src\main\AndroidManifest.xml:24:9-32:20
+33-->C:\Users\romnan\AndroidStudioProjects\GitHubUser\app\src\main\AndroidManifest.xml:24:19-60
+34            <intent-filter>
+34-->C:\Users\romnan\AndroidStudioProjects\GitHubUser\app\src\main\AndroidManifest.xml:25:13-27:29
+35                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+35-->C:\Users\romnan\AndroidStudioProjects\GitHubUser\app\src\main\AndroidManifest.xml:26:17-84
+35-->C:\Users\romnan\AndroidStudioProjects\GitHubUser\app\src\main\AndroidManifest.xml:26:25-81
+36            </intent-filter>
+37
+38            <meta-data
+38-->C:\Users\romnan\AndroidStudioProjects\GitHubUser\app\src\main\AndroidManifest.xml:29:13-31:70
+39                android:name="android.appwidget.provider"
+39-->C:\Users\romnan\AndroidStudioProjects\GitHubUser\app\src\main\AndroidManifest.xml:30:17-58
+40                android:resource="@xml/fav_user_stack_widget_info" />
+40-->C:\Users\romnan\AndroidStudioProjects\GitHubUser\app\src\main\AndroidManifest.xml:31:17-67
+41        </receiver>
+42        <receiver
+42-->C:\Users\romnan\AndroidStudioProjects\GitHubUser\app\src\main\AndroidManifest.xml:33:9-36:39
+43            android:name="com.romnan.githubuser.receiver.AlarmReceiver"
+43-->C:\Users\romnan\AndroidStudioProjects\GitHubUser\app\src\main\AndroidManifest.xml:34:13-51
+44            android:enabled="true"
+44-->C:\Users\romnan\AndroidStudioProjects\GitHubUser\app\src\main\AndroidManifest.xml:35:13-35
+45            android:exported="true" />
+45-->C:\Users\romnan\AndroidStudioProjects\GitHubUser\app\src\main\AndroidManifest.xml:36:13-36
+46
+47        <provider
+47-->C:\Users\romnan\AndroidStudioProjects\GitHubUser\app\src\main\AndroidManifest.xml:38:9-44:78
+48            android:name="com.romnan.githubuser.provider.FavUserProvider"
+48-->C:\Users\romnan\AndroidStudioProjects\GitHubUser\app\src\main\AndroidManifest.xml:39:13-53
+49            android:authorities="com.romnan.githubuser"
+49-->C:\Users\romnan\AndroidStudioProjects\GitHubUser\app\src\main\AndroidManifest.xml:40:13-56
+50            android:enabled="true"
+50-->C:\Users\romnan\AndroidStudioProjects\GitHubUser\app\src\main\AndroidManifest.xml:41:13-35
+51            android:exported="true"
+51-->C:\Users\romnan\AndroidStudioProjects\GitHubUser\app\src\main\AndroidManifest.xml:42:13-36
+52            android:readPermission="com.romnan.githubuser.READ_DATABASE"
+52-->C:\Users\romnan\AndroidStudioProjects\GitHubUser\app\src\main\AndroidManifest.xml:43:13-73
+53            android:writePermission="com.romnan.githubuser.WRITE_DATABASE" />
+53-->C:\Users\romnan\AndroidStudioProjects\GitHubUser\app\src\main\AndroidManifest.xml:44:13-75
+54
+55        <activity android:name="com.romnan.githubuser.activity.MainActivity" >
+55-->C:\Users\romnan\AndroidStudioProjects\GitHubUser\app\src\main\AndroidManifest.xml:46:9-52:20
+55-->C:\Users\romnan\AndroidStudioProjects\GitHubUser\app\src\main\AndroidManifest.xml:46:19-56
+56            <intent-filter>
+56-->C:\Users\romnan\AndroidStudioProjects\GitHubUser\app\src\main\AndroidManifest.xml:47:13-51:29
+57                <action android:name="android.intent.action.MAIN" />
+57-->C:\Users\romnan\AndroidStudioProjects\GitHubUser\app\src\main\AndroidManifest.xml:48:17-69
+57-->C:\Users\romnan\AndroidStudioProjects\GitHubUser\app\src\main\AndroidManifest.xml:48:25-66
+58
+59                <category android:name="android.intent.category.LAUNCHER" />
+59-->C:\Users\romnan\AndroidStudioProjects\GitHubUser\app\src\main\AndroidManifest.xml:50:17-77
+59-->C:\Users\romnan\AndroidStudioProjects\GitHubUser\app\src\main\AndroidManifest.xml:50:27-74
+60            </intent-filter>
+61        </activity>
+62        <activity android:name="com.romnan.githubuser.activity.UserDetailActivity" >
+62-->C:\Users\romnan\AndroidStudioProjects\GitHubUser\app\src\main\AndroidManifest.xml:53:9-57:20
+62-->C:\Users\romnan\AndroidStudioProjects\GitHubUser\app\src\main\AndroidManifest.xml:53:19-62
+63            <meta-data
+63-->C:\Users\romnan\AndroidStudioProjects\GitHubUser\app\src\main\AndroidManifest.xml:54:13-56:58
+64                android:name="android.support.PARENT_ACTIVITY"
+64-->C:\Users\romnan\AndroidStudioProjects\GitHubUser\app\src\main\AndroidManifest.xml:55:17-63
+65                android:value=".activity.MainActivity" />
+65-->C:\Users\romnan\AndroidStudioProjects\GitHubUser\app\src\main\AndroidManifest.xml:56:17-55
+66        </activity>
+67        <activity android:name="com.romnan.githubuser.activity.FavUserActivity" >
+67-->C:\Users\romnan\AndroidStudioProjects\GitHubUser\app\src\main\AndroidManifest.xml:58:9-62:20
+67-->C:\Users\romnan\AndroidStudioProjects\GitHubUser\app\src\main\AndroidManifest.xml:58:19-59
+68            <meta-data
+68-->C:\Users\romnan\AndroidStudioProjects\GitHubUser\app\src\main\AndroidManifest.xml:54:13-56:58
+69                android:name="android.support.PARENT_ACTIVITY"
+69-->C:\Users\romnan\AndroidStudioProjects\GitHubUser\app\src\main\AndroidManifest.xml:55:17-63
+70                android:value=".activity.MainActivity" />
+70-->C:\Users\romnan\AndroidStudioProjects\GitHubUser\app\src\main\AndroidManifest.xml:56:17-55
+71        </activity>
+72        <activity android:name="com.romnan.githubuser.activity.PreferenceActivity" >
+72-->C:\Users\romnan\AndroidStudioProjects\GitHubUser\app\src\main\AndroidManifest.xml:63:9-67:20
+72-->C:\Users\romnan\AndroidStudioProjects\GitHubUser\app\src\main\AndroidManifest.xml:63:19-62
+73            <meta-data
+73-->C:\Users\romnan\AndroidStudioProjects\GitHubUser\app\src\main\AndroidManifest.xml:54:13-56:58
+74                android:name="android.support.PARENT_ACTIVITY"
+74-->C:\Users\romnan\AndroidStudioProjects\GitHubUser\app\src\main\AndroidManifest.xml:55:17-63
+75                android:value=".activity.MainActivity" />
+75-->C:\Users\romnan\AndroidStudioProjects\GitHubUser\app\src\main\AndroidManifest.xml:56:17-55
+76        </activity>
+77
+78        <service
+78-->C:\Users\romnan\AndroidStudioProjects\GitHubUser\app\src\main\AndroidManifest.xml:69:9-71:72
+79            android:name="com.romnan.githubuser.widget.StackWidgetService"
+79-->C:\Users\romnan\AndroidStudioProjects\GitHubUser\app\src\main\AndroidManifest.xml:70:13-54
+80            android:permission="android.permission.BIND_REMOTEVIEWS" />
+80-->C:\Users\romnan\AndroidStudioProjects\GitHubUser\app\src\main\AndroidManifest.xml:71:13-69
+81    </application>
+82
+83</manifest>
