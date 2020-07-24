@@ -34,12 +34,12 @@ public class StackRemoteViewsFactory implements RemoteViewsService.RemoteViewsFa
 
     @Override
     public void onDataSetChanged() {
-        mWidgetItems.clear();
         final long identityToken = Binder.clearCallingIdentity();
+        mWidgetItems = new ArrayList<>();
 
         Cursor dataCursor = mContext.getContentResolver().query(DatabaseContract.FavUserColumns.CONTENT_URI,
                 null, null, null, null);
-        if (dataCursor != null) {
+        if (dataCursor != null && dataCursor.getCount() > 0) {
             mWidgetItems.addAll(MappingHelper.mapCursorToArrayList(dataCursor));
             dataCursor.close();
         }
@@ -48,34 +48,36 @@ public class StackRemoteViewsFactory implements RemoteViewsService.RemoteViewsFa
 
     @Override
     public RemoteViews getViewAt(int position) {
-        final RemoteViews remoteViews = new RemoteViews(mContext.getPackageName(), R.layout.widget_item);
-        remoteViews.setTextViewText(R.id.tvName, mWidgetItems.get(position).getName());
-        remoteViews.setTextViewText(R.id.tvUsername, mWidgetItems.get(position).getUsername());
+        if (getCount() > 0) {
+            final RemoteViews remoteViews = new RemoteViews(mContext.getPackageName(), R.layout.widget_item);
+            remoteViews.setTextViewText(R.id.tvName, mWidgetItems.get(position).getName());
+            remoteViews.setTextViewText(R.id.tvUsername, mWidgetItems.get(position).getUsername());
 
-        Glide
-                .with(mContext)
-                .asBitmap()
-                .load(mWidgetItems.get(position).getAvatar())
-                .circleCrop()
-                .into(new CustomTarget<Bitmap>(100, 100) {
-                    @Override
-                    public void onResourceReady(@NonNull Bitmap resource,
-                                                @Nullable Transition<? super Bitmap> transition) {
-                        remoteViews.setImageViewBitmap(R.id.user_profile_image, resource);
-                    }
+            Glide
+                    .with(mContext)
+                    .asBitmap()
+                    .load(mWidgetItems.get(position).getAvatar())
+                    .circleCrop()
+                    .into(new CustomTarget<Bitmap>(100, 100) {
+                        @Override
+                        public void onResourceReady(@NonNull Bitmap resource,
+                                                    @Nullable Transition<? super Bitmap> transition) {
+                            remoteViews.setImageViewBitmap(R.id.user_profile_image, resource);
+                        }
 
-                    @Override
-                    public void onLoadCleared(@Nullable Drawable placeholder) {
-                    }
-                });
+                        @Override
+                        public void onLoadCleared(@Nullable Drawable placeholder) {
+                        }
+                    });
 
-        Bundle extras = new Bundle();
-        extras.putString(FavUserStackWidget.EXTRA_ITEM, mWidgetItems.get(position).getName());
-        Intent fillInIntent = new Intent();
-        fillInIntent.putExtras(extras);
+            Bundle extras = new Bundle();
+            extras.putString(FavUserStackWidget.EXTRA_ITEM, mWidgetItems.get(position).getName());
+            Intent fillInIntent = new Intent();
+            fillInIntent.putExtras(extras);
 
-        remoteViews.setOnClickFillInIntent(R.id.widget_item, fillInIntent);
-        return remoteViews;
+            remoteViews.setOnClickFillInIntent(R.id.widget_item, fillInIntent);
+            return remoteViews;
+        } else return null;
     }
 
     @Override

@@ -47,13 +47,13 @@ public class FavUserStackWidget extends AppWidgetProvider {
 
     @Override
     public void onReceive(Context context, Intent intent) {
-        super.onReceive(context, intent);
         if (intent.getAction() != null) {
             if (intent.getAction().equals(TOAST_ACTION)) {
                 String name = intent.getStringExtra(EXTRA_ITEM);
                 Toast.makeText(context, name, Toast.LENGTH_SHORT).show();
             }
         }
+        super.onReceive(context, intent);
     }
 }
 
