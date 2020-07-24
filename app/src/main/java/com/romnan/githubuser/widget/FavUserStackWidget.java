@@ -51,8 +51,8 @@ public class FavUserStackWidget extends AppWidgetProvider {
         super.onReceive(context, intent);
         if (intent.getAction() != null) {
             if (intent.getAction().equals(TOAST_ACTION)) {
-                int viewIndex = intent.getIntExtra(EXTRA_ITEM, 0);
-                Toast.makeText(context, "Touched view " + viewIndex, Toast.LENGTH_SHORT).show();
+                String name = intent.getStringExtra(EXTRA_ITEM);
+                Toast.makeText(context, name, Toast.LENGTH_SHORT).show();
             }
         }
     }

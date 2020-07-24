@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/widget_item"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:background="@drawable/bg_rounded_corner"
@@ -8,9 +9,11 @@
     android:padding="@dimen/padding_8dp">
 
     <ImageView
+        android:id="@+id/image_profile"
         android:layout_width="wrap_content"
-        android:layout_height="70dp"
+        android:layout_height="40dp"
         android:layout_gravity="center_horizontal"
+        android:contentDescription="@string/user_profile_image"
         android:src="@drawable/ic_github" />
 
     <TextView
