@@ -57,7 +57,9 @@ public class FavUserActivity extends AppCompatActivity {
                 progressBar.setVisibility(View.GONE);
                 if (users.size() > 0) {
                     userRecyclerViewAdapter.setData(users);
+                    tvNotFound.setVisibility(View.INVISIBLE);
                 } else {
+                    userRecyclerViewAdapter.setData(new ArrayList<User>());
                     tvNotFound.setVisibility(View.VISIBLE);
                     tvNotFound.setText(R.string.not_found);
                 }
