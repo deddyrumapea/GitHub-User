@@ -152,10 +152,10 @@ public class UserDetailActivity extends AppCompatActivity {
             Snackbar.make(findViewById(R.id.user_detail_layout), R.string.added_favorite,
                     Snackbar.LENGTH_SHORT).show();
         }
-//        updateFavStackWidget();
+        updateFavStackWidget();
     }
 
-    boolean isFavoriteUser(int id) {
+    private boolean isFavoriteUser(int id) {
         Uri uriWithId = Uri.parse(CONTENT_URI + "/" + id);
         if (uriWithId != null) {
             Cursor cursor = getContentResolver().query(uriWithId, null, null,

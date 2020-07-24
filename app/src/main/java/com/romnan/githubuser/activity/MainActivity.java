@@ -54,10 +54,64 @@ public class MainActivity extends AppCompatActivity {
         //display instruction screen
         displayInstruction(savedInstanceState);
 
-        setRecyclerView();
-        setSearchView();
+        setUpRecyclerView();
+        setUpSearchView();
+        setUpViewModel();
+    }
 
+    private void setUpRecyclerView() {
+        //Set up recyclerView
+        RecyclerView rvUsers = findViewById(R.id.rv_users);
+        rvUsers.setLayoutManager(new LinearLayoutManager(this));
+        userRecyclerViewAdapter = new UserRecyclerViewAdapter();
+        userRecyclerViewAdapter.notifyDataSetChanged();
+        rvUsers.setAdapter(userRecyclerViewAdapter);
 
+        //recyclerView item click callback method, open UserDetailActivity for specific user clicked
+        userRecyclerViewAdapter.setOnItemClickCallback(new UserRecyclerViewAdapter.OnItemClickCallback() {
+            @Override
+            public void onItemClicked(User data) {
+                if (data != null) {
+                    Intent intent = new Intent(MainActivity.this,
+                            UserDetailActivity.class);
+                    intent.putExtra(UserDetailActivity.EXTRA_USER, data);
+                    startActivity(intent);
+                }
+            }
+        });
+    }
+
+    private void setUpSearchView() {
+        // Seach bar
+        SearchManager searchManager = (SearchManager) getSystemService(Context.SEARCH_SERVICE);
+
+        //Create searchView
+        if (searchManager != null) {
+            final SearchView searchView = findViewById(R.id.search_bar);
+            searchView.setSearchableInfo(searchManager.getSearchableInfo(getComponentName()));
+            searchView.setQueryHint(getResources().getString(R.string.hint_search_user));
+            searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+                @Override
+                public boolean onQueryTextSubmit(String query) {
+                    mainViewModel.clearData(); //clear search result on the screen
+                    tvNotFound.setVisibility(View.GONE);
+                    progressBar.setVisibility(View.VISIBLE);
+                    mainViewModel.searchUser(query);
+                    searchView.clearFocus(); // hide keyboard
+                    searched = true;
+                    searchQuery = query;
+                    return true;
+                }
+
+                @Override
+                public boolean onQueryTextChange(String newText) {
+                    return false;
+                }
+            });
+        }
+    }
+
+    private void setUpViewModel() {
         //Set up mainViewModel
         mainViewModel = new ViewModelProvider
                 (this, new ViewModelProvider.NewInstanceFactory()).get(MainViewModel.class);
@@ -94,58 +148,6 @@ public class MainActivity extends AppCompatActivity {
                 searched = false; //display instruction screen again if the state changed
             }
         });
-    }
-
-    private void setRecyclerView() {
-        //Set up recyclerView
-        RecyclerView rvUsers = findViewById(R.id.rv_users);
-        rvUsers.setLayoutManager(new LinearLayoutManager(this));
-        userRecyclerViewAdapter = new UserRecyclerViewAdapter();
-        userRecyclerViewAdapter.notifyDataSetChanged();
-        rvUsers.setAdapter(userRecyclerViewAdapter);
-
-        //recyclerView item click callback method, open UserDetailActivity for specific user clicked
-        userRecyclerViewAdapter.setOnItemClickCallback(new UserRecyclerViewAdapter.OnItemClickCallback() {
-            @Override
-            public void onItemClicked(User data) {
-                if (data != null) {
-                    Intent intent = new Intent(MainActivity.this,
-                            UserDetailActivity.class);
-                    intent.putExtra(UserDetailActivity.EXTRA_USER, data);
-                    startActivity(intent);
-                }
-            }
-        });
-    }
-
-    private void setSearchView() {
-        // Seach bar
-        SearchManager searchManager = (SearchManager) getSystemService(Context.SEARCH_SERVICE);
-
-        //Create searchView
-        if (searchManager != null) {
-            final SearchView searchView = findViewById(R.id.search_bar);
-            searchView.setSearchableInfo(searchManager.getSearchableInfo(getComponentName()));
-            searchView.setQueryHint(getResources().getString(R.string.hint_search_user));
-            searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-                @Override
-                public boolean onQueryTextSubmit(String query) {
-                    mainViewModel.clearData(); //clear search result on the screen
-                    tvNotFound.setVisibility(View.GONE);
-                    progressBar.setVisibility(View.VISIBLE);
-                    mainViewModel.searchUser(query);
-                    searchView.clearFocus(); // hide keyboard
-                    searched = true;
-                    searchQuery = query;
-                    return true;
-                }
-
-                @Override
-                public boolean onQueryTextChange(String newText) {
-                    return false;
-                }
-            });
-        }
     }
 
     @Override
