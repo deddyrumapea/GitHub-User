@@ -26,6 +26,7 @@ public class StackRemoteViewsFactory implements RemoteViewsService.RemoteViewsFa
 
     @Override
     public void onDataSetChanged() {
+        mWidgetItems.clear();
         final long identityToken = Binder.clearCallingIdentity();
 
         Cursor dataCursor = mContext.getContentResolver().query(DatabaseContract.FavUserColumns.CONTENT_URI,
@@ -34,7 +35,6 @@ public class StackRemoteViewsFactory implements RemoteViewsService.RemoteViewsFa
             mWidgetItems.addAll(MappingHelper.mapCursorToArrayList(dataCursor));
             dataCursor.close();
         }
-
         Binder.restoreCallingIdentity(identityToken);
     }
 
