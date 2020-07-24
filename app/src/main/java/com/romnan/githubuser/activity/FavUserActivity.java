@@ -1,42 +1,34 @@
 package com.romnan.githubuser.activity;
 
-import android.content.Context;
 import android.content.Intent;
-import android.database.ContentObserver;
-import android.database.Cursor;
-import android.os.AsyncTask;
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.HandlerThread;
 import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.romnan.githubuser.R;
 import com.romnan.githubuser.adapter.UserRecyclerViewAdapter;
-import com.romnan.githubuser.database.DatabaseContract;
-import com.romnan.githubuser.helper.MappingHelper;
+import com.romnan.githubuser.database.FavUserHelper;
 import com.romnan.githubuser.model.User;
+import com.romnan.githubuser.viewmodel.FavUserViewModel;
 
-import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 
-interface LoadFavUsersCallback {
-    void preExecute();
 
-    void postExecute(ArrayList<User> users);
-}
-
-public class FavUserActivity extends AppCompatActivity implements LoadFavUsersCallback {
+public class FavUserActivity extends AppCompatActivity {
     private static final String EXTRA_STATE = "extra_state";
     private UserRecyclerViewAdapter userRecyclerViewAdapter;
     private ProgressBar progressBar;
     private TextView tvNotFound;
+    private FavUserViewModel favUserViewModel;
+    private FavUserHelper favUserHelper;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,24 +46,25 @@ public class FavUserActivity extends AppCompatActivity implements LoadFavUsersCa
         rvFavUsers.setHasFixedSize(true);
         userRecyclerViewAdapter = new UserRecyclerViewAdapter();
         rvFavUsers.setAdapter(userRecyclerViewAdapter);
+        progressBar.setVisibility(View.VISIBLE);
 
-        HandlerThread handlerThread = new HandlerThread("DataObserver");
-        handlerThread.start();
-        Handler handler = new Handler(handlerThread.getLooper());
-
-        DataObserver myObserver = new DataObserver(handler, this);
-        getContentResolver().registerContentObserver(DatabaseContract.FavUserColumns.CONTENT_URI,
-                true, myObserver);
-
-        if (savedInstanceState == null) {
-            // Proses ambil data
-            new LoadFavUsersAsync(this, this).execute();
-        } else {
-            ArrayList<User> list = savedInstanceState.getParcelableArrayList(EXTRA_STATE);
-            if (list != null) {
-                userRecyclerViewAdapter.setData(list);
+        favUserHelper = FavUserHelper.getInstance(getApplicationContext());
+        favUserHelper.open();
+        favUserViewModel = new ViewModelProvider
+                (this, new ViewModelProvider.NewInstanceFactory()).get(FavUserViewModel.class);
+        favUserViewModel.loadFavUser(favUserHelper);
+        favUserViewModel.getFavUsers().observe(this, new Observer<ArrayList<User>>() {
+            @Override
+            public void onChanged(ArrayList<User> users) {
+                progressBar.setVisibility(View.GONE);
+                if (users.size() > 0) {
+                    userRecyclerViewAdapter.setData(users);
+                } else {
+                    tvNotFound.setVisibility(View.VISIBLE);
+                    tvNotFound.setText(R.string.not_found);
+                }
             }
-        }
+        });
 
         //recyclerView item click callback method, open UserDetailActivity for specific user clicked
         userRecyclerViewAdapter.setOnItemClickCallback(new UserRecyclerViewAdapter.OnItemClickCallback() {
@@ -92,89 +85,4 @@ public class FavUserActivity extends AppCompatActivity implements LoadFavUsersCa
         super.onSaveInstanceState(outState);
         outState.putParcelableArrayList(EXTRA_STATE, userRecyclerViewAdapter.getUsersList());
     }
-
-    @Override
-    public void preExecute() {
-        runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                progressBar.setVisibility(View.VISIBLE);
-            }
-        });
-    }
-
-    @Override
-    public void postExecute(ArrayList<User> users) {
-        progressBar.setVisibility(View.GONE);
-        if (users.size() > 0) {
-            userRecyclerViewAdapter.setData(users);
-            tvNotFound.setVisibility(View.GONE);
-        } else {
-            userRecyclerViewAdapter.setData(new ArrayList<User>());
-            tvNotFound.setText(getString(R.string.not_found));
-            tvNotFound.setVisibility(View.VISIBLE);
-        }
-    }
-
-    public static class DataObserver extends ContentObserver {
-
-        final Context context;
-
-        public DataObserver(Handler handler, Context context) {
-            super(handler);
-            this.context = context;
-        }
-
-        @Override
-        public void onChange(boolean selfChange) {
-            super.onChange(selfChange);
-            new LoadFavUsersAsync(context, (LoadFavUsersCallback) context).execute();
-        }
-    }
-
-    private static class LoadFavUsersAsync extends AsyncTask<Void, Void, ArrayList<User>> {
-        private final WeakReference<Context> weakContext;
-        private final WeakReference<LoadFavUsersCallback> weakCallback;
-
-        private LoadFavUsersAsync(Context context, LoadFavUsersCallback callback) {
-            weakContext = new WeakReference<>(context);
-            weakCallback = new WeakReference<>(callback);
-        }
-
-        @Override
-        protected void onPreExecute() {
-            super.onPreExecute();
-            weakCallback.get().preExecute();
-        }
-
-        @Override
-        protected ArrayList<User> doInBackground(Void... voids) {
-            Context context = weakContext.get();
-            Cursor dataCursor = context.getContentResolver().query(DatabaseContract.FavUserColumns.CONTENT_URI,
-                    null, null, null, null);
-            assert dataCursor != null;
-            return MappingHelper.mapCursorToArrayList(dataCursor);
-        }
-
-        @Override
-        protected void onPostExecute(ArrayList<User> users) {
-            super.onPostExecute(users);
-            weakCallback.get().postExecute(users);
-        }
-    }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

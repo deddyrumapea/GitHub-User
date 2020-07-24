@@ -1,19 +1,19 @@
 [
     {
-        "merged": "C:\\Users\\romnan\\AndroidStudioProjects\\GitHubUser\\app\\build\\intermediates\\res\\merged\\debug\\drawable_ic_dot.xml.flat",
-        "source": "C:\\Users\\romnan\\AndroidStudioProjects\\GitHubUser\\app\\src\\main\\res\\drawable\\ic_dot.xml"
-    },
-    {
-        "merged": "C:\\Users\\romnan\\AndroidStudioProjects\\GitHubUser\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-xxxhdpi_ic_launcher.png.flat",
-        "source": "C:\\Users\\romnan\\AndroidStudioProjects\\GitHubUser\\app\\src\\main\\res\\mipmap-xxxhdpi\\ic_launcher.png"
+        "merged": "C:\\Users\\romnan\\AndroidStudioProjects\\GitHubUser\\app\\build\\intermediates\\res\\merged\\debug\\drawable_ic_company.xml.flat",
+        "source": "C:\\Users\\romnan\\AndroidStudioProjects\\GitHubUser\\app\\src\\main\\res\\drawable\\ic_company.xml"
     },
     {
         "merged": "C:\\Users\\romnan\\AndroidStudioProjects\\GitHubUser\\app\\build\\intermediates\\res\\merged\\debug\\drawable_ic_github.xml.flat",
         "source": "C:\\Users\\romnan\\AndroidStudioProjects\\GitHubUser\\app\\src\\main\\res\\drawable\\ic_github.xml"
     },
     {
-        "merged": "C:\\Users\\romnan\\AndroidStudioProjects\\GitHubUser\\app\\build\\intermediates\\res\\merged\\debug\\drawable_ic_company.xml.flat",
-        "source": "C:\\Users\\romnan\\AndroidStudioProjects\\GitHubUser\\app\\src\\main\\res\\drawable\\ic_company.xml"
+        "merged": "C:\\Users\\romnan\\AndroidStudioProjects\\GitHubUser\\app\\build\\intermediates\\res\\merged\\debug\\mipmap-xxxhdpi_ic_launcher.png.flat",
+        "source": "C:\\Users\\romnan\\AndroidStudioProjects\\GitHubUser\\app\\src\\main\\res\\mipmap-xxxhdpi\\ic_launcher.png"
+    },
+    {
+        "merged": "C:\\Users\\romnan\\AndroidStudioProjects\\GitHubUser\\app\\build\\intermediates\\res\\merged\\debug\\drawable_ic_dot.xml.flat",
+        "source": "C:\\Users\\romnan\\AndroidStudioProjects\\GitHubUser\\app\\src\\main\\res\\drawable\\ic_dot.xml"
     },
     {
         "merged": "C:\\Users\\romnan\\AndroidStudioProjects\\GitHubUser\\app\\build\\intermediates\\res\\merged\\debug\\layout_activity_preference.xml.flat",
@@ -80,6 +80,10 @@
         "source": "C:\\Users\\romnan\\AndroidStudioProjects\\GitHubUser\\app\\src\\main\\res\\mipmap-xhdpi\\ic_launcher.png"
     },
     {
+        "merged": "C:\\Users\\romnan\\AndroidStudioProjects\\GitHubUser\\app\\build\\intermediates\\res\\merged\\debug\\drawable-nodpi_widget_preview.png.flat",
+        "source": "C:\\Users\\romnan\\AndroidStudioProjects\\GitHubUser\\app\\src\\main\\res\\drawable-nodpi\\widget_preview.png"
+    },
+    {
         "merged": "C:\\Users\\romnan\\AndroidStudioProjects\\GitHubUser\\app\\build\\intermediates\\res\\merged\\debug\\xml_preferences.xml.flat",
         "source": "C:\\Users\\romnan\\AndroidStudioProjects\\GitHubUser\\app\\src\\main\\res\\xml\\preferences.xml"
     },
@@ -110,10 +114,6 @@
     {
         "merged": "C:\\Users\\romnan\\AndroidStudioProjects\\GitHubUser\\app\\build\\intermediates\\res\\merged\\debug\\menu_menu.xml.flat",
         "source": "C:\\Users\\romnan\\AndroidStudioProjects\\GitHubUser\\app\\src\\main\\res\\menu\\menu.xml"
-    },
-    {
-        "merged": "C:\\Users\\romnan\\AndroidStudioProjects\\GitHubUser\\app\\build\\intermediates\\res\\merged\\debug\\drawable-nodpi_example_appwidget_preview.png.flat",
-        "source": "C:\\Users\\romnan\\AndroidStudioProjects\\GitHubUser\\app\\src\\main\\res\\drawable-nodpi\\example_appwidget_preview.png"
     },
     {
         "merged": "C:\\Users\\romnan\\AndroidStudioProjects\\GitHubUser\\app\\build\\intermediates\\res\\merged\\debug\\drawable_ic_location_grey.xml.flat",
