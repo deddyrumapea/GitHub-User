@@ -7,3 +7,5 @@
     android:previewImage="@drawable/example_appwidget_preview"
     android:updatePeriodMillis="0"
     android:widgetCategory="home_screen" />
+
+    <!--TODO : change preview-->

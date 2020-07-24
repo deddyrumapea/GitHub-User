@@ -67,7 +67,7 @@ public class FollowTabFragment extends Fragment {
         //Set progressbar and not found view
         final ProgressBar loadingBar = view.findViewById(R.id.loadingBar);
         loadingBar.setVisibility(View.VISIBLE);
-        final TextView notFound = view.findViewById(R.id.not_found);
+        final TextView notFound = view.findViewById(R.id.tv_not_found);
 
         //Set recyclerview
         final RecyclerView rvUsers = view.findViewById(R.id.rv_users);

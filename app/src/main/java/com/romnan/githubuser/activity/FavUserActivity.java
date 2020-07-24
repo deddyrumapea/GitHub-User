@@ -48,7 +48,7 @@ public class FavUserActivity extends AppCompatActivity implements LoadFavUsersCa
         }
 
         progressBar = findViewById(R.id.loadingBar);
-        tvNotFound = findViewById(R.id.not_found);
+        tvNotFound = findViewById(R.id.tv_not_found);
         RecyclerView rvFavUsers = findViewById(R.id.rv_users);
         rvFavUsers.setLayoutManager(new LinearLayoutManager(this));
         rvFavUsers.setHasFixedSize(true);

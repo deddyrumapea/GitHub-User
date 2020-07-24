@@ -23,7 +23,7 @@
         tools:listitem="@layout/item_user" />
 
     <TextView
-        android:id="@+id/not_found"
+        android:id="@+id/tv_not_found"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"

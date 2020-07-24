@@ -46,7 +46,7 @@ public class MainActivity extends AppCompatActivity {
 
         //Setup loading progress bar and not found screen
         progressBar = findViewById(R.id.loadingBar);
-        tvNotFound = findViewById(R.id.not_found);
+        tvNotFound = findViewById(R.id.tv_not_found);
 
         //display instruction screen
         displayInstruction(savedInstanceState);
