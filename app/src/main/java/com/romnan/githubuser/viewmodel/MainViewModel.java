@@ -27,13 +27,14 @@ public class MainViewModel extends ViewModel {
     private static final int ERROR_NO_MATCH = 69;
     private static final int ERROR_UNKNOWN_EXCEPTION = 70;
     private static final int ERROR_NO_DATA = 71;
+    private static final String TOKEN = "token 8befcd295d25e40a2350c035d5001b5b4b50ff1e";
 
     public void searchUser(final String query) {
         final ArrayList<User> listItems = new ArrayList<>();
 
         //Creating HTTP Client instance
-        client.addHeader("Authorization",
-                "token ed903ca68d3ef4efdd21d3a502d83fac0836e3c3");
+        client.addHeader("Authorization", TOKEN
+        );
         client.addHeader("User-Agent", "request");
 
         //Search user
@@ -79,8 +80,7 @@ public class MainViewModel extends ViewModel {
         final ArrayList<User> listItems = new ArrayList<>();
 
         //Creating HTTP Client instance
-        client.addHeader("Authorization",
-                "token ed903ca68d3ef4efdd21d3a502d83fac0836e3c3");
+        client.addHeader("Authorization", TOKEN);
         client.addHeader("User-Agent", "request");
 
         //Search user
