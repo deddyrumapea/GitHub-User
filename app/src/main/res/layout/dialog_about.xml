@@ -11,7 +11,7 @@
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="@dimen/margin_16dp"
         android:text="@string/label_about_me"
-        android:textStyle="bold" />
+        android:textStyle="italic" />
 
     <ImageView
         android:id="@+id/about_profile_image"

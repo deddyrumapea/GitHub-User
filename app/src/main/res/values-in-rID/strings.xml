@@ -20,7 +20,6 @@
     <string name="alarm_message">Temukan pengguna populer di GitHub!</string>
     <string name="reminder_set_up">Notifikasi pengingat telah diatur</string>
     <string name="reminder_cancelled">Notifikasi pengingat dibatalkan</string>
-    <string name="empty_text">Tidak ada data</string>
     <string name="error_0">Tidak dapat terhubung</string>
     <string name="error_69">Tidak dapat menemukan pengguna yang cocok dengan \'%s\'</string>
     <string name="error_70">Kesalahan mengurai data</string>

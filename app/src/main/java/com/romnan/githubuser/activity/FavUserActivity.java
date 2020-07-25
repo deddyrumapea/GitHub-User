@@ -56,7 +56,7 @@ public class FavUserActivity extends AppCompatActivity {
                 } else {
                     userRecyclerViewAdapter.setData(new ArrayList<User>());
                     tvNotFound.setVisibility(View.VISIBLE);
-                    tvNotFound.setText(R.string.not_found);
+                    tvNotFound.setText(R.string.error_71);
                 }
             }
         });

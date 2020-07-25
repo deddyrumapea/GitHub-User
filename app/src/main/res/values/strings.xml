@@ -23,7 +23,6 @@
     <string name="reminder_set_up">Reminder notification is set up</string>
     <string name="reminder_cancelled">Reminder notification is cancelled</string>
     <string name="appwidget_text" translatable="false">Fav Users</string>
-    <string name="empty_text">No data</string>
     <string name="error_0">Unable to connect</string>
     <string name="error_69">We couldn\'t find any users matching \'%s\'</string>
     <string name="error_70">Error parsing data</string>
