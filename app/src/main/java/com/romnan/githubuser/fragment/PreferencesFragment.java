@@ -3,24 +3,18 @@ package com.romnan.githubuser.fragment;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 
-import androidx.preference.ListPreference;
 import androidx.preference.PreferenceFragmentCompat;
 import androidx.preference.SwitchPreference;
 
 import com.romnan.githubuser.R;
 import com.romnan.githubuser.receiver.AlarmReceiver;
 
-import java.util.Locale;
-
 public class PreferencesFragment extends PreferenceFragmentCompat
         implements SharedPreferences.OnSharedPreferenceChangeListener {
 
     private static final String ALARM_TIME = "09:00";
     private String REMINDER;
-    private String LANGUAGE;
-
     private SwitchPreference reminderPref;
-    private ListPreference languagePref;
 
     private AlarmReceiver alarmReceiver;
 
@@ -33,18 +27,14 @@ public class PreferencesFragment extends PreferenceFragmentCompat
 
     private void init() {
         REMINDER = getResources().getString(R.string.key_reminder);
-        LANGUAGE = getResources().getString(R.string.key_language);
 
         reminderPref = findPreference(REMINDER);
-        languagePref = findPreference(LANGUAGE);
         alarmReceiver = new AlarmReceiver();
     }
 
     private void setSummaries() {
         SharedPreferences sharedPreferences = getPreferenceManager().getSharedPreferences();
         reminderPref.setChecked(sharedPreferences.getBoolean(REMINDER, false));
-        languagePref.setSummary(sharedPreferences.getString(LANGUAGE,
-                Locale.getDefault().getDisplayLanguage()));
     }
 
     @Override
@@ -71,10 +61,6 @@ public class PreferencesFragment extends PreferenceFragmentCompat
                     alarmReceiver.cancelAlarm(getContext());
                 }
             }
-        }
-        if (key.equals(LANGUAGE)) {
-            languagePref.setSummary(sharedPreferences.getString(LANGUAGE,
-                    Locale.getDefault().getDisplayLanguage()));
         }
     }
 }
