@@ -34,7 +34,6 @@ public class FavUserViewModel extends ViewModel implements LoadFavUserCallback {
     @Override
     public void postExecute(ArrayList<User> favUsers) {
         if (favUsers.size() > 0) {
-            // TODO : mungkin pake postValue
             favUsersList.postValue(favUsers);
         } else {
             favUsersList.postValue(new ArrayList<User>());

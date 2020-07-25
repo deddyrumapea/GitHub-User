@@ -33,13 +33,12 @@ interface LoadFavUsersCallback {
     void postExecute(ArrayList<User> users);
 }
 
-// TODO : update all the shit here
-
 public class MainActivity extends AppCompatActivity implements LoadFavUsersCallback {
     private static final String EXTRA_STATE = "extra_state";
     private UserRecyclerViewAdapter userRecyclerViewAdapter;
     private ProgressBar progressBar;
     private TextView tvNotFound;
+    private DataObserver myObserver;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,7 +61,7 @@ public class MainActivity extends AppCompatActivity implements LoadFavUsersCallb
         handlerThread.start();
         Handler handler = new Handler(handlerThread.getLooper());
 
-        DataObserver myObserver = new DataObserver(handler, this);
+        myObserver = new DataObserver(handler, this);
         getContentResolver().registerContentObserver(DatabaseContract.FavUserColumns.CONTENT_URI,
                 true, myObserver);
 
@@ -164,5 +163,11 @@ public class MainActivity extends AppCompatActivity implements LoadFavUsersCallb
             super.onPostExecute(users);
             weakCallback.get().postExecute(users);
         }
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        getContentResolver().unregisterContentObserver(myObserver);
     }
 }

@@ -172,7 +172,6 @@ public class UserDetailActivity extends AppCompatActivity {
         AppWidgetManager appWidgetManager = AppWidgetManager.getInstance(getApplicationContext());
         ComponentName thisWidget = new ComponentName(getApplicationContext(), FavUserStackWidget.class);
         int[] appWidgetIds = appWidgetManager.getAppWidgetIds(thisWidget);
-        //TODO : there is an error here
         appWidgetManager.notifyAppWidgetViewDataChanged(appWidgetIds, R.id.stack_view);
     }
 
