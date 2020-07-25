@@ -6,7 +6,7 @@
     android:layout_height="wrap_content"
     android:layout_marginHorizontal="@dimen/margin_16dp"
     android:layout_marginVertical="@dimen/margin_8dp"
-    android:background="@drawable/bg_rounded_corner_white"
+    android:background="@drawable/bg_rounded_corner_white_ripple"
     android:orientation="horizontal"
     android:padding="@dimen/padding_16dp">
 
