@@ -20,81 +20,16 @@ import cz.msebera.android.httpclient.Header;
 
 public class MainViewModel extends ViewModel {
     private final String TAG = MainViewModel.class.getSimpleName();
+    private static final String TOKEN = "token 8befcd295d25e40a2350c035d5001b5b4b50ff1e";
     private OnErrorReceivingDataListener onErrorReceivingDataListener;
     private MutableLiveData<ArrayList<User>> usersList = new MutableLiveData<>();
     private AsyncHttpClient client = new AsyncHttpClient();
-
-    public void searchUser(final String query) {
-        final ArrayList<User> listItems = new ArrayList<>();
-
-        //Creating HTTP Client instance
-        client.addHeader("Authorization",
-                "token ed903ca68d3ef4efdd21d3a502d83fac0836e3c3");
-        client.addHeader("User-Agent", "request");
-
-        //Search user
-        String urlSearch = String.format("https://api.github.com/search/users?q=%s", query);
-        client.get(urlSearch, new AsyncHttpResponseHandler() {
-            @Override
-            public void onSuccess(int statusCode, Header[] headers, byte[] responseBody) {
-                try {
-                    //Parsing JSON
-                    String response = new String(responseBody);
-                    JSONObject responseObject = new JSONObject(response);
-                    if (responseObject.getInt("total_count") == 0) {
-                        onErrorReceivingDataListener.onErrorReceivingData
-                                (String.format("We couldn’t find any users matching\n'%s'", query));
-                    }
-                    JSONArray items = responseObject.getJSONArray("items");
-
-                    for (int i = 0; i < items.length(); i++) {
-                        JSONObject item = items.getJSONObject(i);
-                        User user = new User();
-
-                        String username = item.getString("login");
-                        user.setAvatar(item.getString("avatar_url"));
-                        user.setUsername(username);
-                        setUserDetails(user, username, listItems);
-                        listItems.add(user);
-                    }
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                    Log.e(TAG, "exception " + e.getMessage());
-                    onErrorReceivingDataListener.onErrorReceivingData(e.getLocalizedMessage());
-                }
-            }
-
-            @Override
-            public void onFailure(int statusCode, Header[] headers, byte[] responseBody, Throwable error) {
-                Log.d(TAG, "onFailure: " + error.getMessage());
-                String errorMessage;
-                switch (statusCode) {
-                    case 0:
-                        errorMessage = "Unable to connect";
-                        break;
-                    case 401:
-                        errorMessage = statusCode + " : Bad request";
-                        break;
-                    case 403:
-                        errorMessage = statusCode + " : Forbidden";
-                        break;
-                    case 404:
-                        errorMessage = statusCode + " : Not found";
-                        break;
-                    default:
-                        errorMessage = statusCode + error.getMessage();
-                }
-                onErrorReceivingDataListener.onErrorReceivingData(errorMessage);
-            }
-        });
-    }
 
     public void setFollowList(final String username, final String tabType) {
         final ArrayList<User> listItems = new ArrayList<>();
 
         //Creating HTTP Client instance
-        client.addHeader("Authorization",
-                "token ed903ca68d3ef4efdd21d3a502d83fac0836e3c3");
+        client.addHeader("Authorization", TOKEN);
         client.addHeader("User-Agent", "request");
 
         //Search user
@@ -185,10 +120,6 @@ public class MainViewModel extends ViewModel {
 
     public void setOnErrorReceivingDataListener(OnErrorReceivingDataListener onErrorReceivingDataListener) {
         this.onErrorReceivingDataListener = onErrorReceivingDataListener;
-    }
-
-    public void clearData() {
-        usersList.postValue(new ArrayList<User>());
     }
 
     public interface OnErrorReceivingDataListener {
